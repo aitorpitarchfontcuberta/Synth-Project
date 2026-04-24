@@ -55,7 +55,6 @@ public:
 
 private:
 
-	//juce::dsp::Oscillator<float> osc{ [](float x) { return std::sin(x); } };
     juce::dsp::Oscillator<float> osc{ [](float x) { return x < 0.0f ? -1.0f : 1.0f; }, 200 };
 	juce::dsp::Gain<float> gain;
 

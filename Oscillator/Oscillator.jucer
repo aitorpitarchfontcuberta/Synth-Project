@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="vucd9K" name="Oscillator" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginManufacturer="AitorPitarchFontcuberta">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="AitorPitarchFontcuberta">
   <MAINGROUP id="HhNZNr" name="Oscillator">
     <GROUP id="{BC87897F-8C2A-E0D2-1BBD-EDD4AF049B97}" name="Source">
       <FILE id="NyRi0G" name="PluginProcessor.cpp" compile="1" resource="0"

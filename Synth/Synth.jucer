@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="m2s3k0" name="Synth" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              companyName="AitorPitarchFontcuberta">
   <MAINGROUP id="yxFNFT" name="Synth">
     <GROUP id="{3708CCB8-71BE-B44C-9F59-33E338D0CA12}" name="Source">
       <FILE id="trkOF3" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -28,6 +29,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -54,6 +56,7 @@
         <MODULEPATH id="juce_graphics" path="../../../../Documents/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../Documents/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../Documents/JUCE/JUCE/modules"/>
       </MODULEPATHS>
     </VS2026>
   </EXPORTFORMATS>
