@@ -5,6 +5,15 @@
               companyName="AitorPitarchFontcuberta">
   <MAINGROUP id="yxFNFT" name="Synth">
     <GROUP id="{3708CCB8-71BE-B44C-9F59-33E338D0CA12}" name="Source">
+      <GROUP id="{6C7E998A-351D-A8DA-E6ED-DDA8540595D5}" name="UI">
+        <FILE id="W7bMKF" name="AdsrComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrComponent.cpp"/>
+        <FILE id="jczZYL" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+      </GROUP>
+      <GROUP id="{142BAAFE-7FD4-6BBD-D401-9A3C45E1C0A3}" name="Data">
+        <FILE id="zGjLnX" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
+        <FILE id="nQc41l" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+      </GROUP>
       <FILE id="trkOF3" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="V6LsMJ" name="PluginProcessor.h" compile="0" resource="0"

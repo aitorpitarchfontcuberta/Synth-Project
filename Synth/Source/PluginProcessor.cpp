@@ -162,7 +162,7 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 			auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
 			auto& release = *apvts.getRawParameterValue("RELEASE");
 
-			voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
+			voice->update(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
 
