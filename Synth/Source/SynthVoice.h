@@ -13,6 +13,7 @@
 #include <JuceHeader.h>
 #include "SynthSound.h"
 #include "Data/AdsrData.h"
+#include "Data/OscData.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {
@@ -30,13 +31,15 @@ public:
 
     void update(const float attack, const float decay, const float sustain, const float release);
 
+    OscData& getOscillator() { return osc; }
 
 private:
 	AdsrData adsr;
 	juce::AudioBuffer<float> synthBuffer;
 
 
-    juce::dsp::Oscillator<float> osc{ [](float x) { return x / juce::MathConstants<float>::pi; }};
+    OscData osc;
+    //juce::dsp::Oscillator<float> osc{ [](float x) { return x / juce::MathConstants<float>::pi; }};
     juce::dsp::Gain<float> gain;
 	bool isPrepared{ false };
 
