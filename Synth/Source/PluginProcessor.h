@@ -11,6 +11,9 @@
 #include <JuceHeader.h>
 #include "SynthSound.h"
 #include "SynthVoice.h"
+#include "Data/ScopeBuffer.h"
+#include "Data/PresetManager.h"
+#include "Data/EffectsChain.h"
 
 
 //==============================================================================
@@ -57,6 +60,9 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     juce::AudioProcessorValueTreeState apvts;
+    ScopeBuffer scopeBuffer;
+    PresetManager presetManager { apvts };
+    EffectsChain  effects;
 
 private:
     juce::Synthesiser synth;

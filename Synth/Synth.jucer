@@ -9,6 +9,78 @@
         <FILE id="W7bMKF" name="AdsrComponent.cpp" compile="1" resource="0"
               file="Source/UI/AdsrComponent.cpp"/>
         <FILE id="jczZYL" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="AdsVz1" name="AdsrVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrVisualizer.cpp"/>
+        <FILE id="AdsVz2" name="AdsrVisualizer.h" compile="0" resource="0"
+              file="Source/UI/AdsrVisualizer.h"/>
+        <FILE id="LfoCmp1" name="LfoComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LfoComponent.cpp"/>
+        <FILE id="LfoCmp2" name="LfoComponent.h" compile="0" resource="0"
+              file="Source/UI/LfoComponent.h"/>
+        <FILE id="MEnv01" name="ModEnvComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ModEnvComponent.cpp"/>
+        <FILE id="MEnv02" name="ModEnvComponent.h" compile="0" resource="0"
+              file="Source/UI/ModEnvComponent.h"/>
+        <FILE id="MixCmp1" name="MixerComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MixerComponent.cpp"/>
+        <FILE id="MixCmp2" name="MixerComponent.h" compile="0" resource="0"
+              file="Source/UI/MixerComponent.h"/>
+        <FILE id="MstCmp1" name="MasterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MasterComponent.cpp"/>
+        <FILE id="MstCmp2" name="MasterComponent.h" compile="0" resource="0"
+              file="Source/UI/MasterComponent.h"/>
+        <FILE id="WfVis01" name="WaveformVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/WaveformVisualizer.cpp"/>
+        <FILE id="WfVis02" name="WaveformVisualizer.h" compile="0" resource="0"
+              file="Source/UI/WaveformVisualizer.h"/>
+        <FILE id="MxBar01" name="MixBarVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/MixBarVisualizer.cpp"/>
+        <FILE id="MxBar02" name="MixBarVisualizer.h" compile="0" resource="0"
+              file="Source/UI/MixBarVisualizer.h"/>
+        <FILE id="UnVis01" name="UnisonVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/UnisonVisualizer.cpp"/>
+        <FILE id="UnVis02" name="UnisonVisualizer.h" compile="0" resource="0"
+              file="Source/UI/UnisonVisualizer.h"/>
+        <FILE id="ScpCm01" name="OscilloscopeComponent.cpp" compile="1" resource="0"
+              file="Source/UI/OscilloscopeComponent.cpp"/>
+        <FILE id="ScpCm02" name="OscilloscopeComponent.h" compile="0" resource="0"
+              file="Source/UI/OscilloscopeComponent.h"/>
+        <FILE id="MxVis01" name="MixerVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/MixerVisualizer.cpp"/>
+        <FILE id="MxVis02" name="MixerVisualizer.h" compile="0" resource="0"
+              file="Source/UI/MixerVisualizer.h"/>
+        <FILE id="LfVis01" name="LfoVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/LfoVisualizer.cpp"/>
+        <FILE id="LfVis02" name="LfoVisualizer.h" compile="0" resource="0"
+              file="Source/UI/LfoVisualizer.h"/>
+        <FILE id="VlVis01" name="VelocityCurveVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/VelocityCurveVisualizer.cpp"/>
+        <FILE id="VlVis02" name="VelocityCurveVisualizer.h" compile="0" resource="0"
+              file="Source/UI/VelocityCurveVisualizer.h"/>
+        <FILE id="GlVis01" name="GlideVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/GlideVisualizer.cpp"/>
+        <FILE id="GlVis02" name="GlideVisualizer.h" compile="0" resource="0"
+              file="Source/UI/GlideVisualizer.h"/>
+        <FILE id="SpcCm01" name="SpectrumComponent.cpp" compile="1" resource="0"
+              file="Source/UI/SpectrumComponent.cpp"/>
+        <FILE id="SpcCm02" name="SpectrumComponent.h" compile="0" resource="0"
+              file="Source/UI/SpectrumComponent.h"/>
+        <FILE id="FltCm01" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/FilterComponent.cpp"/>
+        <FILE id="FltCm02" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/UI/FilterComponent.h"/>
+        <FILE id="FltVs01" name="FilterResponseVisualizer.cpp" compile="1" resource="0"
+              file="Source/UI/FilterResponseVisualizer.cpp"/>
+        <FILE id="FltVs02" name="FilterResponseVisualizer.h" compile="0" resource="0"
+              file="Source/UI/FilterResponseVisualizer.h"/>
+        <FILE id="PstBr01" name="PresetBarComponent.cpp" compile="1" resource="0"
+              file="Source/UI/PresetBarComponent.cpp"/>
+        <FILE id="PstBr02" name="PresetBarComponent.h" compile="0" resource="0"
+              file="Source/UI/PresetBarComponent.h"/>
+        <FILE id="FxCmp01" name="FxComponent.cpp" compile="1" resource="0"
+              file="Source/UI/FxComponent.cpp"/>
+        <FILE id="FxCmp02" name="FxComponent.h" compile="0" resource="0"
+              file="Source/UI/FxComponent.h"/>
         <FILE id="EonVaj" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="DTY6l7" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
@@ -18,6 +90,17 @@
         <FILE id="nQc41l" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
         <FILE id="dXkbJc" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="GC8R1B" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+        <FILE id="LfoDat1" name="LfoData.cpp" compile="1" resource="0" file="Source/Data/LfoData.cpp"/>
+        <FILE id="LfoDat2" name="LfoData.h" compile="0" resource="0" file="Source/Data/LfoData.h"/>
+        <FILE id="ScpBuf1" name="ScopeBuffer.h" compile="0" resource="0" file="Source/Data/ScopeBuffer.h"/>
+        <FILE id="FltDt01" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
+        <FILE id="FltDt02" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
+        <FILE id="FctPr01" name="FactoryPresets.cpp" compile="1" resource="0" file="Source/Data/FactoryPresets.cpp"/>
+        <FILE id="FctPr02" name="FactoryPresets.h" compile="0" resource="0" file="Source/Data/FactoryPresets.h"/>
+        <FILE id="PrsMg01" name="PresetManager.cpp" compile="1" resource="0" file="Source/Data/PresetManager.cpp"/>
+        <FILE id="PrsMg02" name="PresetManager.h" compile="0" resource="0" file="Source/Data/PresetManager.h"/>
+        <FILE id="FxChn01" name="EffectsChain.cpp" compile="1" resource="0" file="Source/Data/EffectsChain.cpp"/>
+        <FILE id="FxChn02" name="EffectsChain.h" compile="0" resource="0" file="Source/Data/EffectsChain.h"/>
       </GROUP>
       <FILE id="trkOF3" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

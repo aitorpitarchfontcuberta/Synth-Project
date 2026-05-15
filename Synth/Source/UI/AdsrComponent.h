@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "AdsrVisualizer.h"
 
 //==============================================================================
 /*
@@ -25,12 +26,21 @@ public:
     void resized() override;
 
 private:
-    void AdsrComponent::setSliderParams(juce::Slider& slider);
+    void setSliderParams(juce::Slider& slider);
+    void setLabelParams(juce::Label& label, const juce::String& text);
+
+    juce::Label titleLabel;
+    std::unique_ptr<AdsrVisualizer> visualizer;
 
     juce::Slider attackSlider;
     juce::Slider decaySlider;
     juce::Slider sustainSlider;
     juce::Slider releaseSlider;
+
+    juce::Label attackLabel;
+    juce::Label decayLabel;
+    juce::Label sustainLabel;
+    juce::Label releaseLabel;
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
 
