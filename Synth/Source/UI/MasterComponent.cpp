@@ -11,7 +11,7 @@
 
 MasterComponent::MasterComponent(juce::AudioProcessorValueTreeState& apvts)
 {
-    titleLabel.setText("MASTER / VOICE", juce::dontSendNotification);
+    titleLabel.setText("MASTER", juce::dontSendNotification);
     titleLabel.setFont(juce::Font(14.0f, juce::Font::bold));
     titleLabel.setColour(juce::Label::textColourId, juce::Colour(0xff7a9dff));
     addAndMakeVisible(titleLabel);
@@ -22,15 +22,17 @@ MasterComponent::MasterComponent(juce::AudioProcessorValueTreeState& apvts)
     addAndMakeVisible(voiceModeBox);
     setLabelParams(voiceModeLabel, "Voice");
 
-    setSliderParams(gainSlider);
-    setSliderParams(velSlider);
-    setSliderParams(glideSlider);
-    setSliderParams(unisonSlider);
-    setSliderParams(detuneSlider);
-    setSliderParams(spreadSlider);
-
-    glideSlider.setTextValueSuffix(" s");
+    // --- Sliders de fila inferior (con TextBoxBelow) ---
+    setSliderParamsCompact(gainSlider);
+    setSliderParamsCompact(unisonSlider);
+    setSliderParamsCompact(detuneSlider);
+    setSliderParamsCompact(spreadSlider);
     detuneSlider.setTextValueSuffix(" ct");
+
+    // --- Sliders laterales (Vel y Glide) con TextBoxLeft ---
+    setSliderParamsSide(velSlider);
+    setSliderParamsSide(glideSlider);
+    glideSlider.setTextValueSuffix(" s");
 
     setLabelParams(gainLabel,   "Gain");
     setLabelParams(velLabel,    "Vel");
@@ -70,49 +72,78 @@ void MasterComponent::paint(juce::Graphics& g)
 
 void MasterComponent::resized()
 {
-    auto b = getLocalBounds().reduced(8);
+    auto b = getLocalBounds().reduced(10);
 
-    // Cabecera: title izq, voice mode der
+    // Cabecera: titulo + Voice combo
     auto headRow = b.removeFromTop(24);
-    titleLabel.setBounds(headRow.removeFromLeft(headRow.getWidth() / 2));
-    voiceModeLabel.setBounds(headRow.removeFromLeft(40));
-    voiceModeBox.setBounds(headRow);
-
-    b.removeFromTop(4);
-
-    // Fila de 3 mini-visualizadores: Velocity | Glide | Unison
-    auto visRow = b.removeFromTop(80);
-    {
-        const int gap = 6;
-        const int colW = (visRow.getWidth() - gap * 2) / 3;
-        if (velVis)    velVis   ->setBounds(visRow.removeFromLeft(colW));
-        visRow.removeFromLeft(gap);
-        if (glideVis)  glideVis ->setBounds(visRow.removeFromLeft(colW));
-        visRow.removeFromLeft(gap);
-        if (unisonVis) unisonVis->setBounds(visRow);
-    }
+    titleLabel.setBounds(headRow.removeFromLeft(80));
+    voiceModeBox.setBounds(headRow.removeFromRight(headRow.getWidth() / 2 + 20));
+    voiceModeLabel.setBounds(headRow.removeFromRight(40));
 
     b.removeFromTop(6);
 
-    // 6 knobs en una fila
-    const int labelH = 14;
-    const int n = 6;
-    const int w = b.getWidth() / n;
-    auto layout = [&](juce::Slider& s, juce::Label& l, int i)
+    // Filas Velocity y Glide: visualizador estrecho + textos+knob mas grandes a la derecha.
+    const int sideRowH    = 70;   // un poco mas alto para que el knob respire
+    const int textboxW    = 50;   // ancho del textbox a la izquierda del knob
+    const int knobW       = 56;   // ancho del area del knob rotativo
+    const int sideTotalW  = textboxW + knobW;
+    const int labelH      = 14;
+    const int visGap      = 6;
+
+    auto layoutSideRow = [&](juce::Component& visualizer,
+                             juce::Slider&    slider,
+                             juce::Label&     label)
     {
-        auto a = juce::Rectangle<int>(b.getX() + i * w, b.getY(), w, b.getHeight());
+        auto row = b.removeFromTop(sideRowH);
+
+        // Reservar a la derecha el bloque slider+textbox
+        auto sliderTotalArea = row.removeFromRight(sideTotalW);
+
+        // Etiqueta encima del textbox (los primeros textboxW px)
+        auto labelArea = sliderTotalArea.removeFromTop(labelH);
+        label.setBounds(labelArea.removeFromLeft(textboxW));
+
+        // Slider ocupa el resto (textbox a la izquierda, knob a la derecha)
+        slider.setBounds(sliderTotalArea);
+
+        // Visualizador ocupa lo restante a la izquierda
+        row.removeFromRight(visGap);
+        visualizer.setBounds(row);
+
+        b.removeFromTop(6);
+    };
+
+    if (velVis)   layoutSideRow(*velVis,   velSlider,   velLabel);
+    if (glideVis) layoutSideRow(*glideVis, glideSlider, glideLabel);
+
+    // Unison visualizer (ancho completo, sin knob lateral)
+    if (unisonVis)
+    {
+        unisonVis->setBounds(b.removeFromTop(60));
+        b.removeFromTop(10);
+    }
+
+    // Fila inferior con 4 knobs (Detune, Spread, Unison, Gain).
+    // Ocupa el espacio sobrante.
+    auto bottomRow = b;
+
+    const int n = 4;
+    const int w = bottomRow.getWidth() / n;
+    auto layoutKnob = [&](juce::Slider& s, juce::Label& l, int i)
+    {
+        auto a = juce::Rectangle<int>(bottomRow.getX() + i * w,
+                                      bottomRow.getY(),
+                                      w, bottomRow.getHeight());
         l.setBounds(a.removeFromBottom(labelH));
         s.setBounds(a.reduced(2));
     };
-    layout(gainSlider,   gainLabel,   0);
-    layout(velSlider,    velLabel,    1);
-    layout(glideSlider,  glideLabel,  2);
-    layout(unisonSlider, unisonLabel, 3);
-    layout(detuneSlider, detuneLabel, 4);
-    layout(spreadSlider, spreadLabel, 5);
+    layoutKnob(detuneSlider, detuneLabel, 0);
+    layoutKnob(spreadSlider, spreadLabel, 1);
+    layoutKnob(unisonSlider, unisonLabel, 2);
+    layoutKnob(gainSlider,   gainLabel,   3);
 }
 
-void MasterComponent::setSliderParams(juce::Slider& s)
+void MasterComponent::setSliderParamsCompact(juce::Slider& s)
 {
     s.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     s.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 60, 14);
@@ -124,10 +155,22 @@ void MasterComponent::setSliderParams(juce::Slider& s)
     addAndMakeVisible(s);
 }
 
+void MasterComponent::setSliderParamsSide(juce::Slider& s)
+{
+    s.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    s.setTextBoxStyle(juce::Slider::TextBoxLeft, false, 50, 22);
+    s.setColour(juce::Slider::rotarySliderFillColourId,    juce::Colour(0xfffff066));
+    s.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xff3a3a50));
+    s.setColour(juce::Slider::thumbColourId,               juce::Colours::white);
+    s.setColour(juce::Slider::textBoxTextColourId,         juce::Colours::white);
+    s.setColour(juce::Slider::textBoxOutlineColourId,      juce::Colours::transparentBlack);
+    addAndMakeVisible(s);
+}
+
 void MasterComponent::setLabelParams(juce::Label& l, const juce::String& t)
 {
     l.setText(t, juce::dontSendNotification);
-    l.setFont(juce::Font(10.5f, juce::Font::bold));
+    l.setFont(juce::Font(11.0f, juce::Font::bold));
     l.setJustificationType(juce::Justification::centred);
     l.setColour(juce::Label::textColourId, juce::Colours::lightgrey);
     addAndMakeVisible(l);

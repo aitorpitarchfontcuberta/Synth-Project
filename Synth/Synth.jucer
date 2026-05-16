@@ -81,6 +81,14 @@
               file="Source/UI/FxComponent.cpp"/>
         <FILE id="FxCmp02" name="FxComponent.h" compile="0" resource="0"
               file="Source/UI/FxComponent.h"/>
+        <FILE id="PiPnl01" name="ParamInfoPanel.cpp" compile="1" resource="0"
+              file="Source/UI/ParamInfoPanel.cpp"/>
+        <FILE id="PiPnl02" name="ParamInfoPanel.h" compile="0" resource="0"
+              file="Source/UI/ParamInfoPanel.h"/>
+        <FILE id="PiMgr01" name="ParamInfoManager.cpp" compile="1" resource="0"
+              file="Source/UI/ParamInfoManager.cpp"/>
+        <FILE id="PiMgr02" name="ParamInfoManager.h" compile="0" resource="0"
+              file="Source/UI/ParamInfoManager.h"/>
         <FILE id="EonVaj" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="DTY6l7" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
@@ -101,6 +109,8 @@
         <FILE id="PrsMg02" name="PresetManager.h" compile="0" resource="0" file="Source/Data/PresetManager.h"/>
         <FILE id="FxChn01" name="EffectsChain.cpp" compile="1" resource="0" file="Source/Data/EffectsChain.cpp"/>
         <FILE id="FxChn02" name="EffectsChain.h" compile="0" resource="0" file="Source/Data/EffectsChain.h"/>
+        <FILE id="PiDb01" name="ParamInfoDatabase.cpp" compile="1" resource="0" file="Source/Data/ParamInfoDatabase.cpp"/>
+        <FILE id="PiDb02" name="ParamInfoDatabase.h" compile="0" resource="0" file="Source/Data/ParamInfoDatabase.h"/>
       </GROUP>
       <FILE id="trkOF3" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

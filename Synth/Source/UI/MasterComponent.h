@@ -23,8 +23,9 @@ public:
     void resized() override;
 
 private:
-    void setSliderParams(juce::Slider& s);
-    void setLabelParams(juce::Label& l, const juce::String& t);
+    void setSliderParamsCompact(juce::Slider& s); // Para los knobs de la fila inferior (textbox abajo)
+    void setSliderParamsSide   (juce::Slider& s); // Para Vel/Glide (textbox a la izquierda)
+    void setLabelParams        (juce::Label& l, const juce::String& t);
 
     juce::Label titleLabel;
     std::unique_ptr<VelocityCurveVisualizer> velVis;

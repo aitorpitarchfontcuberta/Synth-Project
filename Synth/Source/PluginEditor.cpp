@@ -13,21 +13,23 @@ SynthAudioProcessorEditor::SynthAudioProcessorEditor(SynthAudioProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p)
 {
     setSize(800, 600);
+
+    // El panel de info se mostrara como hijo del editor.
+    infoManager.setParentForPanel(this);
+
     addAndMakeVisible(presetBar);
 
     const auto bgOsc  = juce::Colour(0xff15151f);
     const auto bgMod  = juce::Colour(0xff181520);
-    const auto bgEnv  = juce::Colour(0xff141a1c);
     const auto bgFilt = juce::Colour(0xff141d1a);
     const auto bgFx   = juce::Colour(0xff181820);
     const auto bgMast = juce::Colour(0xff1a1818);
 
-    tabs.addTab("Oscillators", bgOsc,  &page1, false);
-    tabs.addTab("Modulation",  bgMod,  &page2, false);
-    tabs.addTab("Envelope",    bgEnv,  &page3, false);
-    tabs.addTab("Filter",      bgFilt, &page5, false);
-    tabs.addTab("FX",          bgFx,   &page6, false);
-    tabs.addTab("Master",      bgMast, &page4, false);
+    tabs.addTab("Oscillators",     bgOsc,  &page1, false);
+    tabs.addTab("Modulation",      bgMod,  &page2, false);
+    tabs.addTab("Filter",          bgFilt, &page5, false);
+    tabs.addTab("FX",              bgFx,   &page6, false);
+    tabs.addTab("Master/Envelope", bgMast, &page4, false);
 
     tabs.setTabBarDepth(30);
     tabs.setOutline(0);

@@ -10,9 +10,11 @@
 
 #include <JuceHeader.h>
 #include "AdsrComponent.h"
+#include "ParamInfoManager.h"
 
 //==============================================================================
-AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts)
+AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts,
+                             ParamInfoManager* infoManager)
 {
     titleLabel.setText("AMP ENV", juce::dontSendNotification);
     titleLabel.setFont(juce::Font(14.0f, juce::Font::bold));
@@ -43,6 +45,14 @@ AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts)
     decayAttachment   = std::make_unique<SliderAttachment>(apvts, "DECAY",   decaySlider);
     sustainAttachment = std::make_unique<SliderAttachment>(apvts, "SUSTAIN", sustainSlider);
     releaseAttachment = std::make_unique<SliderAttachment>(apvts, "RELEASE", releaseSlider);
+
+    if (infoManager != nullptr)
+    {
+        infoManager->attachTo(attackSlider,  "ATTACK");
+        infoManager->attachTo(decaySlider,   "DECAY");
+        infoManager->attachTo(sustainSlider, "SUSTAIN");
+        infoManager->attachTo(releaseSlider, "RELEASE");
+    }
 }
 
 AdsrComponent::~AdsrComponent()

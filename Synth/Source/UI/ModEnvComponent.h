@@ -11,10 +11,13 @@
 #include <JuceHeader.h>
 #include "AdsrVisualizer.h"
 
+class ParamInfoManager;
+
 class ModEnvComponent : public juce::Component
 {
 public:
-    ModEnvComponent(juce::AudioProcessorValueTreeState& apvts);
+    ModEnvComponent(juce::AudioProcessorValueTreeState& apvts,
+                    ParamInfoManager* infoManager = nullptr);
     ~ModEnvComponent() override;
 
     void paint(juce::Graphics&) override;

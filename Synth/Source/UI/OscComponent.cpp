@@ -8,10 +8,12 @@
 
 #include <JuceHeader.h>
 #include "OscComponent.h"
+#include "ParamInfoManager.h"
 
 OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts,
                            const juce::String& titleText,
-                           const juce::String& paramPrefix)
+                           const juce::String& paramPrefix,
+                           ParamInfoManager* infoManager)
     : title(titleText)
 {
     titleLabel.setText(title, juce::dontSendNotification);
@@ -60,6 +62,15 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts,
     semiAttachment   = std::make_unique<SliderAttachment>(apvts, paramPrefix + "SEMI",   semiSlider);
     fineAttachment   = std::make_unique<SliderAttachment>(apvts, paramPrefix + "FINE",   fineSlider);
     pwAttachment     = std::make_unique<SliderAttachment>(apvts, paramPrefix + "PW",     pwSlider);
+
+    if (infoManager != nullptr)
+    {
+        infoManager->attachTo(oscWaveSelector, paramPrefix + "WAVETYPE");
+        infoManager->attachTo(octaveSlider,    paramPrefix + "OCTAVE");
+        infoManager->attachTo(semiSlider,      paramPrefix + "SEMI");
+        infoManager->attachTo(fineSlider,      paramPrefix + "FINE");
+        infoManager->attachTo(pwSlider,        paramPrefix + "PW");
+    }
 }
 
 OscComponent::~OscComponent() {}

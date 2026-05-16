@@ -8,9 +8,11 @@
 
 #include <JuceHeader.h>
 #include "FilterComponent.h"
+#include "ParamInfoManager.h"
 
 FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts,
-                                 const ScopeBuffer& scopeBuffer)
+                                 const ScopeBuffer& scopeBuffer,
+                                 ParamInfoManager* infoManager)
 {
     titleLabel.setText("FILTER", juce::dontSendNotification);
     titleLabel.setFont(juce::Font(14.0f, juce::Font::bold));
@@ -43,6 +45,15 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts,
 
     responseVis = std::make_unique<FilterResponseVisualizer>(apvts, scopeBuffer);
     addAndMakeVisible(*responseVis);
+
+    if (infoManager != nullptr)
+    {
+        infoManager->attachTo(typeBox,        "FILTER_TYPE");
+        infoManager->attachTo(cutoffSlider,   "FILTER_CUTOFF");
+        infoManager->attachTo(resSlider,      "FILTER_RES");
+        infoManager->attachTo(driveSlider,    "FILTER_DRIVE");
+        infoManager->attachTo(keyTrackSlider, "FILTER_KEYTRACK");
+    }
 }
 
 FilterComponent::~FilterComponent() {}

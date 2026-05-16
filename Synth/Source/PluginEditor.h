@@ -21,6 +21,7 @@
 #include "UI/OscilloscopeComponent.h"
 #include "UI/SpectrumComponent.h"
 #include "UI/PresetBarComponent.h"
+#include "UI/ParamInfoManager.h"
 
 class SynthAudioProcessorEditor : public juce::AudioProcessorEditor
 {
@@ -34,13 +35,16 @@ public:
 private:
     SynthAudioProcessor& audioProcessor;
 
+    // Manager global del sistema de info de parametros (click derecho).
+    ParamInfoManager infoManager;
+
     // === Contenido de cada pestania ===
     class OscillatorsPage : public juce::Component
     {
     public:
-        OscillatorsPage(juce::AudioProcessorValueTreeState& apvts)
-            : osc1(apvts, "OSC 1", "OSC1"),
-              osc2(apvts, "OSC 2", "OSC2"),
+        OscillatorsPage(juce::AudioProcessorValueTreeState& apvts, ParamInfoManager* info)
+            : osc1(apvts, "OSC 1", "OSC1", info),
+              osc2(apvts, "OSC 2", "OSC2", info),
               mixer(apvts)
         {
             addAndMakeVisible(osc1);
@@ -64,10 +68,10 @@ private:
     class ModulationPage : public juce::Component
     {
     public:
-        ModulationPage(juce::AudioProcessorValueTreeState& apvts)
+        ModulationPage(juce::AudioProcessorValueTreeState& apvts, ParamInfoManager* info)
             : lfo1(apvts, "LFO 1", "LFO1"),
               lfo2(apvts, "LFO 2", "LFO2"),
-              modEnv(apvts)
+              modEnv(apvts, info)
         {
             addAndMakeVisible(lfo1);
             addAndMakeVisible(lfo2);
@@ -90,35 +94,37 @@ private:
         ModEnvComponent modEnv;
     };
 
-    class EnvelopePage : public juce::Component
+    // Pestania combinada: Master a la izquierda, Envelope a la derecha
+    class MasterEnvelopePage : public juce::Component
     {
     public:
-        EnvelopePage(juce::AudioProcessorValueTreeState& apvts) : ampAdsr(apvts)
-        {
-            addAndMakeVisible(ampAdsr);
-        }
-        void resized() override { ampAdsr.setBounds(getLocalBounds().reduced(6)); }
-    private:
-        AdsrComponent ampAdsr;
-    };
-
-    class MasterPage : public juce::Component
-    {
-    public:
-        MasterPage(juce::AudioProcessorValueTreeState& apvts) : master(apvts)
+        MasterEnvelopePage(juce::AudioProcessorValueTreeState& apvts, ParamInfoManager* info)
+            : master(apvts), ampAdsr(apvts, info)
         {
             addAndMakeVisible(master);
+            addAndMakeVisible(ampAdsr);
         }
-        void resized() override { master.setBounds(getLocalBounds().reduced(6)); }
+        void resized() override
+        {
+            auto b = getLocalBounds().reduced(6);
+            const int gap = 8;
+            // Master ~50% izquierda, Envelope el resto
+            const int masterW = (b.getWidth() - gap) / 2;
+            master.setBounds (b.removeFromLeft(masterW));
+            b.removeFromLeft(gap);
+            ampAdsr.setBounds(b);
+        }
     private:
         MasterComponent master;
+        AdsrComponent   ampAdsr;
     };
 
     class FilterPage : public juce::Component
     {
     public:
-        FilterPage(juce::AudioProcessorValueTreeState& apvts, const ScopeBuffer& scopeBuffer)
-            : filter(apvts, scopeBuffer)
+        FilterPage(juce::AudioProcessorValueTreeState& apvts, const ScopeBuffer& scopeBuffer,
+                   ParamInfoManager* info)
+            : filter(apvts, scopeBuffer, info)
         {
             addAndMakeVisible(filter);
         }
@@ -139,12 +145,11 @@ private:
         FxComponent fx;
     };
 
-    OscillatorsPage page1 { audioProcessor.apvts };
-    ModulationPage  page2 { audioProcessor.apvts };
-    EnvelopePage    page3 { audioProcessor.apvts };
-    FilterPage      page5 { audioProcessor.apvts, audioProcessor.scopeBuffer };
-    FxPage          page6 { audioProcessor.apvts };
-    MasterPage      page4 { audioProcessor.apvts };
+    OscillatorsPage    page1 { audioProcessor.apvts, &infoManager };
+    ModulationPage     page2 { audioProcessor.apvts, &infoManager };
+    FilterPage         page5 { audioProcessor.apvts, audioProcessor.scopeBuffer, &infoManager };
+    FxPage             page6 { audioProcessor.apvts };
+    MasterEnvelopePage page4 { audioProcessor.apvts, &infoManager };
 
     juce::TabbedComponent tabs { juce::TabbedButtonBar::TabsAtTop };
 

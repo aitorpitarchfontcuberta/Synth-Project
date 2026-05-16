@@ -13,11 +13,14 @@
 #include "FilterResponseVisualizer.h"
 #include "../Data/ScopeBuffer.h"
 
+class ParamInfoManager;
+
 class FilterComponent : public juce::Component
 {
 public:
     FilterComponent(juce::AudioProcessorValueTreeState& apvts,
-                    const ScopeBuffer& scopeBuffer);
+                    const ScopeBuffer& scopeBuffer,
+                    ParamInfoManager* infoManager = nullptr);
     ~FilterComponent() override;
 
     void paint(juce::Graphics&) override;

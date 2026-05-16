@@ -8,8 +8,10 @@
 
 #include <JuceHeader.h>
 #include "ModEnvComponent.h"
+#include "ParamInfoManager.h"
 
-ModEnvComponent::ModEnvComponent(juce::AudioProcessorValueTreeState& apvts)
+ModEnvComponent::ModEnvComponent(juce::AudioProcessorValueTreeState& apvts,
+                                 ParamInfoManager* infoManager)
 {
     titleLabel.setText("MOD ENV", juce::dontSendNotification);
     titleLabel.setFont(juce::Font(14.0f, juce::Font::bold));
@@ -48,6 +50,16 @@ ModEnvComponent::ModEnvComponent(juce::AudioProcessorValueTreeState& apvts)
         apvts, "MENV_ATTACK", "MENV_DECAY", "MENV_SUSTAIN", "MENV_RELEASE",
         juce::Colour(0xff8effc1));
     addAndMakeVisible(*visualizer);
+
+    if (infoManager != nullptr)
+    {
+        infoManager->attachTo(attackSlider,  "MENV_ATTACK");
+        infoManager->attachTo(decaySlider,   "MENV_DECAY");
+        infoManager->attachTo(sustainSlider, "MENV_SUSTAIN");
+        infoManager->attachTo(releaseSlider, "MENV_RELEASE");
+        infoManager->attachTo(depthSlider,   "MENV_DEPTH");
+        infoManager->attachTo(destBox,       "MENV_DEST");
+    }
 }
 
 ModEnvComponent::~ModEnvComponent() {}

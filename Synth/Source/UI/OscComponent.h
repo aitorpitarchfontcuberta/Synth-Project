@@ -13,6 +13,8 @@
 #include <JuceHeader.h>
 #include "WaveformVisualizer.h"
 
+class ParamInfoManager;
+
 class OscComponent : public juce::Component
 {
 public:
@@ -20,7 +22,8 @@ public:
     // paramPrefix: prefijo de los IDs APVTS (p.ej. "OSC1" -> "OSC1WAVETYPE", "OSC1OCTAVE"...)
     OscComponent(juce::AudioProcessorValueTreeState& apvts,
                  const juce::String& titleText,
-                 const juce::String& paramPrefix);
+                 const juce::String& paramPrefix,
+                 ParamInfoManager* infoManager = nullptr);
     ~OscComponent() override;
 
     void paint(juce::Graphics&) override;

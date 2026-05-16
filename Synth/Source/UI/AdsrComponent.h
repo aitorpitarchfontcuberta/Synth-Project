@@ -13,13 +13,16 @@
 #include <JuceHeader.h>
 #include "AdsrVisualizer.h"
 
+class ParamInfoManager;
+
 //==============================================================================
 /*
 */
 class AdsrComponent  : public juce::Component
 {
 public:
-    AdsrComponent(juce::AudioProcessorValueTreeState& apvts);
+    AdsrComponent(juce::AudioProcessorValueTreeState& apvts,
+                  ParamInfoManager* infoManager = nullptr);
     ~AdsrComponent() override;
 
     void paint (juce::Graphics&) override;
